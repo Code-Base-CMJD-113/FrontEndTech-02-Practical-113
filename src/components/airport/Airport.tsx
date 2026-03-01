@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from "react"
-import { getAirports, saveAirport, updateAirport } from "../service/AirportService";
+import { deleteAirport, getAirports, saveAirport, updateAirport } from "../service/AirportService";
 
 export default function Airports() {
     //Model
@@ -74,12 +74,17 @@ const handleOnUpdate = (ap : AirportModel) =>{
   setAirport(ap)
 }
 
-const handleOnDelete = (airportId : string) =>{
+const handleOnDelete = async (airportId : string) =>{
+    const status = await deleteAirport(airportId)
+    if(status !== 204){
+      alert("Delete Failed")
+      return;
+    }
+    alert("Delete Successfull")
+    loadAirports()
 
 }
-
-
-    return (
+   return (
       <>
         <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
