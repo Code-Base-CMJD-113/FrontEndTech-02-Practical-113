@@ -135,9 +135,81 @@ const handleOnChange = (e: ChangeEvent<HTMLInputElement>)=>{
                   Save
                 </button>
               </div>
+              <div>
+                <button
+                  type="reset"
+                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Save
+                </button>
+              </div>
+              <div>
+                <button
+                  type="button"
+                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  View Airpots
+                </button>
+              </div>
             </form>
           </div>
         </div>
+
+           {/* Table with Model */}
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white w-11/12 max-w-8xl rounded-lg shadow-lg p-6 relative">
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="absolute top-3 right-3 text-gray-600 hover:text-black"
+            >
+              ✕
+            </button>
+
+            <h2 className="text-xl font-bold mb-4">Airport List</h2>
+
+            <div className="overflow-x-auto">
+              <table className="w-full border border-gray-300 text-left">
+                <thead className="bg-gray-100">
+                  <tr>
+                     {tblHeaders.map((th,index)=> (
+                       <th key={index}>{th}</th>
+                     ))} 
+                  </tr>
+                </thead>
+                <tbody>
+                  {airportList.map((ap, index) => (
+                    <tr key={index} className="hover:bg-gray-50">
+                      <td className="px-4 py-2 border">{ap.airportId}</td>
+                      <td className="px-4 py-2 border">{ap.airportCode}</td>
+                      <td className="px-4 py-2 border">{ap.airportName}</td>
+                      <td className="px-4 py-2 border">{ap.city}</td>
+                      <td className="px-4 py-2 border">{ap.country}</td>
+          
+                      <td className="px-4 py-2 border">
+                        <button
+                          className="bg-green-600 text-white px-3 py-1 text-sm rounded mr-2"
+                          onClick={()=>handleOnUpdate(ap)}
+                        
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="bg-red-600 text-white px-3 py-1 text-sm rounded"
+                          onClick={()=>handleOnDelete(ap.airportId)}
+                         
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      )}
       </>
     )
   }
