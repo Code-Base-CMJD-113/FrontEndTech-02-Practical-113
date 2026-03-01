@@ -9,7 +9,15 @@ export default function Airports() {
         name: string,
         city: string,
         country: string,
-    }
+    } 
+    // Table mamtters
+    const tblHeaders : string []  = [
+       "Airport Id",
+       "Airport Code",
+       "Airport Name",
+       "Airport City",
+       "Airport Country"
+    ]
     // main state
     const [airport, setAirport] = useState<AirportModel>({
         airportId: "",
@@ -19,7 +27,7 @@ export default function Airports() {
         country: ""
     })
     const [airportList, setAirportList] = useState<AirportModel []>([]);
-
+    const [isModalOpen, setIsModalOpen] = useState(false)
  // get form data
 
 const handleOnChange = (e: ChangeEvent<HTMLInputElement>)=>{
@@ -35,10 +43,16 @@ const handleOnChange = (e: ChangeEvent<HTMLInputElement>)=>{
      
     }
     alert("Saved Successfully")
-   
-   
-
  }
+
+// update Data
+const handleOnUpdate = (ap : AirportModel) =>{
+
+}
+
+const handleOnDelete = (airportId : string) =>{
+
+}
 
 
     return (
@@ -138,17 +152,18 @@ const handleOnChange = (e: ChangeEvent<HTMLInputElement>)=>{
               <div>
                 <button
                   type="reset"
-                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className="flex w-full justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
-                  Save
+                  Reset
                 </button>
               </div>
               <div>
                 <button
                   type="button"
-                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  onClick={()=> setIsModalOpen(true)}
                 >
-                  View Airpots
+                  View Airports
                 </button>
               </div>
             </form>
@@ -182,7 +197,7 @@ const handleOnChange = (e: ChangeEvent<HTMLInputElement>)=>{
                     <tr key={index} className="hover:bg-gray-50">
                       <td className="px-4 py-2 border">{ap.airportId}</td>
                       <td className="px-4 py-2 border">{ap.airportCode}</td>
-                      <td className="px-4 py-2 border">{ap.airportName}</td>
+                      <td className="px-4 py-2 border">{ap.name}</td>
                       <td className="px-4 py-2 border">{ap.city}</td>
                       <td className="px-4 py-2 border">{ap.country}</td>
           
