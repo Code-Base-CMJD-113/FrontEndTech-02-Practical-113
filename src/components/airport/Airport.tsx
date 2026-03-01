@@ -27,7 +27,7 @@ const handleOnChange = (e: ChangeEvent<HTMLInputElement>)=>{
 
 }
  const handleOnSubmit = ()=>{
-    
+    console.log(airport)
  }
 
 
@@ -108,7 +108,7 @@ const handleOnChange = (e: ChangeEvent<HTMLInputElement>)=>{
                 <div className="mt-2">
                   <input
                     id="country"
-                    name="city"
+                    name="country"
                     type="text"
                     onChange={handleOnChange}
                     value={airport.country}
