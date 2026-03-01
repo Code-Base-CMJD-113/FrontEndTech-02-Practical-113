@@ -1,5 +1,5 @@
-import React, { ChangeEvent, useState } from "react"
-import { saveAirport } from "../service/AirportService";
+import React, { ChangeEvent, useEffect, useState } from "react"
+import { getAirports, saveAirport } from "../service/AirportService";
 
 export default function Airports() {
     //Model
@@ -16,7 +16,8 @@ export default function Airports() {
        "Airport Code",
        "Airport Name",
        "Airport City",
-       "Airport Country"
+       "Airport Country",
+       "Action"
     ]
     // main state
     const [airport, setAirport] = useState<AirportModel>({
@@ -28,8 +29,16 @@ export default function Airports() {
     })
     const [airportList, setAirportList] = useState<AirportModel []>([]);
     const [isModalOpen, setIsModalOpen] = useState(false)
- // get form data
+// Load Table
+useEffect(()=>{
+  loadAirports()
+})
 
+const loadAirports = async () =>{
+   const airports = await getAirports()
+   setAirportList(airports)
+}
+ // get form data
 const handleOnChange = (e: ChangeEvent<HTMLInputElement>)=>{
   const {name, value} = e.target
   setAirport((prev) => ({...prev,[name]: value}))

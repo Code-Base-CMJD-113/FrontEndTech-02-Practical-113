@@ -12,7 +12,9 @@ const saveAirport = async (airportData : any) =>{
   
 }
 const getAirports = async () =>{
-    
+    const response = await axios.get(baseUrl)
+    return response.data
+
 }
 const deleteAirport = async () =>{
     
