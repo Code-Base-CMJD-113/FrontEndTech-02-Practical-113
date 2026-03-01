@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useState } from "react"
+import { saveAirport } from "../service/AirportService";
 
 export default function Airports() {
     //Model
@@ -26,8 +27,17 @@ const handleOnChange = (e: ChangeEvent<HTMLInputElement>)=>{
   setAirport((prev) => ({...prev,[name]: value}))
 
 }
- const handleOnSubmit = ()=>{
-    console.log(airport)
+ const handleOnSubmit = async (e: React.SyntheticEvent)=>{
+    e.preventDefault()
+    const status = await saveAirport(airport)
+    if(status !== 201){
+      alert("Save Failed")
+     
+    }
+    alert("Saved Successfully")
+   
+   
+
  }
 
 
