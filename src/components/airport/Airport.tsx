@@ -1,4 +1,4 @@
-import { useState } from "react"
+import React, { ChangeEvent, useState } from "react"
 
 export default function Airports() {
     //Model
@@ -9,6 +9,7 @@ export default function Airports() {
         city: string,
         country: string,
     }
+    // main state
     const [airport, setAirport] = useState<AirportModel>({
         airportId: "",
         airportCode: "",
@@ -17,6 +18,19 @@ export default function Airports() {
         country: ""
     })
     const [airportList, setAirportList] = useState<AirportModel []>([]);
+
+ // get form data
+
+const handleOnChange = (e: ChangeEvent<HTMLInputElement>)=>{
+  const {name, value} = e.target
+  setAirport((prev) => ({...prev,[name]: value}))
+
+}
+ const handleOnSubmit = ()=>{
+    
+ }
+
+
     return (
       <>
         <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -32,7 +46,7 @@ export default function Airports() {
           </div>
   
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleOnSubmit}>
               <div>
                 <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
                   Airport Code
@@ -42,6 +56,8 @@ export default function Airports() {
                     id="airportCode"
                     name="airportCode"
                     type="text"
+                    value={airport.airportCode}
+                    onChange={handleOnChange}
                     required
                     className="border border-gray block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-black-600 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6"
                   />
@@ -59,6 +75,8 @@ export default function Airports() {
                     id="name"
                     name="name"
                     type="text"
+                    value={airport.name}
+                    onChange={handleOnChange}
                     required
                     className="border border-gray block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-black-600 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6"                  />
                 </div>
@@ -75,6 +93,8 @@ export default function Airports() {
                     id="city"
                     name="city"
                     type="text"
+                    value={airport.city}
+                    onChange={handleOnChange}
                     required
                     className="border border-gray block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-black-600 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6"                  />
                 </div>
@@ -90,6 +110,8 @@ export default function Airports() {
                     id="country"
                     name="city"
                     type="text"
+                    onChange={handleOnChange}
+                    value={airport.country}
                     required
                     className="border border-gray block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-black-600 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6"                  />
                 </div>
