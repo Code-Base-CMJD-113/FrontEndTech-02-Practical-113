@@ -1,15 +1,13 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import { Intro } from "./components/intro/Intro";
 
 function App() {
-  let course = "HDSE";
   return (
     <>
-      <h2>Hello {course}</h2>
-      <h2>Hello {course}</h2>
+     <Intro/>
     </>
   );
 }
-
 export default App;
