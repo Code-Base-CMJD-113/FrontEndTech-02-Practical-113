@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from "react"
-import { getAirports, saveAirport } from "../service/AirportService";
+import { getAirports, saveAirport, updateAirport } from "../service/AirportService";
 
 export default function Airports() {
     //Model
@@ -29,10 +29,11 @@ export default function Airports() {
     })
     const [airportList, setAirportList] = useState<AirportModel []>([]);
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [ isUpdate, setIsUpdate] = useState(false)
 // Load Table
 useEffect(()=>{
   loadAirports()
-})
+},[])
 
 const loadAirports = async () =>{
    const airports = await getAirports()
@@ -46,17 +47,31 @@ const handleOnChange = (e: ChangeEvent<HTMLInputElement>)=>{
 }
  const handleOnSubmit = async (e: React.SyntheticEvent)=>{
     e.preventDefault()
-    const status = await saveAirport(airport)
+    if(isUpdate){
+      //update
+     const response =  await updateAirport(airport)
+     if(response !== 204){
+       alert("Update Failed")
+       return;
+     }
+     alert("Update Success")
+     loadAirports()
+    }else{
+      //save
+      const status = await saveAirport(airport)
     if(status !== 201){
       alert("Save Failed")
-     
+      return
     }
     alert("Saved Successfully")
+    }   
  }
 
 // update Data
 const handleOnUpdate = (ap : AirportModel) =>{
-
+  setIsUpdate(true)
+  setIsModalOpen(false)
+  setAirport(ap)
 }
 
 const handleOnDelete = (airportId : string) =>{
@@ -155,7 +170,7 @@ const handleOnDelete = (airportId : string) =>{
                   type="submit"
                   className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
-                  Save
+                  {isUpdate ? "Update" : "Save"}
                 </button>
               </div>
               <div>

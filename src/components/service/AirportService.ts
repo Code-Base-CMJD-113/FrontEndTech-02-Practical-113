@@ -19,8 +19,10 @@ const getAirports = async () =>{
 const deleteAirport = async () =>{
     
 }
-const updateAirport = async () =>{
-    
+const updateAirport = async (updatedAirportData : any) =>{
+    const response = await axios.patch(`${baseUrl}/${updatedAirportData.airportId}`,
+    updatedAirportData)
+    return response.status
 }
 
 export { saveAirport, getAirports, deleteAirport, updateAirport}
