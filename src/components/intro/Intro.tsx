@@ -1,13 +1,15 @@
+import { useState } from "react"
 
 export const Intro = ()=> {
-    let value = 0
+    const [ value, changeValue] = useState(0)
+    // let value = 0
     const valueUp = ()=>{
-        value ++
-        console.log(value)
+        // value ++
+         changeValue(value + 1)
     }
     const valueDown = ()=>{
-        value --
-        console.log(value)
+        // value --
+       changeValue( value - 1)
     }
     return(
         <>
