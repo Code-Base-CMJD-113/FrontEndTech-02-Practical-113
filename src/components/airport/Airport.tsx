@@ -1,4 +1,22 @@
+import { useState } from "react"
+
 export default function Airports() {
+    //Model
+    interface AirportModel {
+        airportId: string,
+        airportCode: string,
+        name: string,
+        city: string,
+        country: string,
+    }
+    const [airport, setAirport] = useState<AirportModel>({
+        airportId: "",
+        airportCode: "",
+        name: "",
+        city: "",
+        country: ""
+    })
+    const [airportList, setAirportList] = useState<AirportModel []>([]);
     return (
       <>
         <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
