@@ -30,6 +30,13 @@ export default function Airports() {
     const [airportList, setAirportList] = useState<AirportModel []>([]);
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [ isUpdate, setIsUpdate] = useState(false)
+    // handle alert related state
+    const [alertView, setAlertView] = useState<
+    {
+     type: "success" | "failed";
+     message: string;
+    } | null
+    >(null);
 // Load Table
 useEffect(()=>{
   loadAirports()
@@ -51,19 +58,31 @@ const handleOnChange = (e: ChangeEvent<HTMLInputElement>)=>{
       //update
      const response =  await updateAirport(airport)
      if(response !== 204){
-       alert("Update Failed")
+       setAlertView({
+         type: "failed",
+         message: "Airport Update Failed"
+       })
        return;
      }
-     alert("Update Success")
+     setAlertView({
+      type: "success",
+      message: "Airport Updated Successfully"
+    })
      loadAirports()
     }else{
       //save
       const status = await saveAirport(airport)
     if(status !== 201){
-      alert("Save Failed")
+      setAlertView({
+        type: "failed",
+        message: "Save Airport Failed"
+      })
       return
     }
-    alert("Saved Successfully")
+    setAlertView({
+      type: "success",
+      message: "Save Airport Successfully"
+    })
     }   
  }
 
@@ -77,10 +96,16 @@ const handleOnUpdate = (ap : AirportModel) =>{
 const handleOnDelete = async (airportId : string) =>{
     const status = await deleteAirport(airportId)
     if(status !== 204){
-      alert("Delete Failed")
+      setAlertView({
+        type: "failed",
+        message: "Delete Airport Failed"
+      })
       return;
     }
-    alert("Delete Successfull")
+    setAlertView({
+      type: "success",
+      message: "Delete Airport Successfully"
+    })
     loadAirports()
 
 }
