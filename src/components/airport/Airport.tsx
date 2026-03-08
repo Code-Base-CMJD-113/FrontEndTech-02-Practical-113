@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from "react"
 import { deleteAirport, getAirports, saveAirport, updateAirport } from "../service/AirportService";
+import { Alert } from "../util/Alert";
 
 export default function Airports() {
     //Model
@@ -121,6 +122,15 @@ const handleOnDelete = async (airportId : string) =>{
             <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
              Airport Details
             </h2>
+            <div>
+              {alertView && (
+                <Alert
+                type={alertView.type}
+                message={alertView.message}
+                onClose={()=> setAlertView(null)}                
+                />
+              )}
+            </div>
           </div>
   
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
