@@ -40,8 +40,12 @@ export default function Airports() {
     >(null);
 // Load Table
 useEffect(()=>{
+  if(alertView){
+    const alertTimer = setTimeout(()=> setAlertView(null),3000)
+   return () => clearTimeout(alertTimer)
+  }
   loadAirports()
-},[])
+},[alertView])
 
 const loadAirports = async () =>{
    const airports = await getAirports()
@@ -84,6 +88,7 @@ const handleOnChange = (e: ChangeEvent<HTMLInputElement>)=>{
       type: "success",
       message: "Save Airport Successfully"
     })
+    loadAirports()
     }   
  }
 
