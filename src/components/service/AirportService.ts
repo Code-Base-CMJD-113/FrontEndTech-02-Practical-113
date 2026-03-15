@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const baseUrl = "http://localhost:8080/air/api/v1/airports"
+const baseUrl = "http://localhost:8081/air/api/v1/airports"
 const saveAirport = async (airportData : any) =>{
     try{
      const response = await axios.post(baseUrl,airportData)
@@ -8,8 +8,6 @@ const saveAirport = async (airportData : any) =>{
     }catch(err){
         console.error(err)
     }
-   
-  
 }
 const getAirports = async () =>{
     const response = await axios.get(baseUrl)
