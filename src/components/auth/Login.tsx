@@ -1,11 +1,16 @@
 import { ChangeEvent, useState } from "react";
 import { signInService } from "../service/AuthService";
+import { useAuth } from "./AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 interface LoginModel {
     email:string,
     password:string
 }
+
 export const Login = () => {
+  const { login} = useAuth()
+  const navigate = useNavigate()
 
   const [signIn, setSignin] = useState<LoginModel>(
       {
@@ -26,7 +31,8 @@ export const Login = () => {
     // service call
     const loginToken =  await signInService(signIn)
     // token handle
-    console.log(loginToken)
+    login(loginToken)
+    navigate("/airports")
 
   }  
   return (

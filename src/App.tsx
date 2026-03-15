@@ -8,10 +8,12 @@ import { Flights } from "./components/flights/Flights";
 import { Route, Routes } from "react-router-dom";
 import { Login } from "./components/auth/Login";
 import { SignUp } from "./components/auth/SignUp";
+import { AuthProvider } from "./components/auth/AuthProvider";
 
 function App() {
   return (
     <>
+    <AuthProvider>
       <Nav />
       <Routes>
         <Route path="/login" element={<Login />} />
@@ -19,6 +21,7 @@ function App() {
         <Route path="/airports" element={<Airports />} />
         <Route path="/flights" element={<Flights />} />
       </Routes>
+      </AuthProvider>
     </>
   );
 }
