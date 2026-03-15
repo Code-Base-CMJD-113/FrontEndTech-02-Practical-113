@@ -26,6 +26,7 @@ export const Login = () => {
     // service call
     const loginToken =  await signInService(signIn)
     // token handle
+    console.log(loginToken)
 
   }  
   return (
