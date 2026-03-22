@@ -1,8 +1,11 @@
 import axios from "axios"
 
-const baseUrl = "http://localhost:8081/air/api/v1/airports"
+// const baseUrl = "http://localhost:8081/air/api/v1/airports"
+const baseUrl = "http://localhost:3500/air/api/v1/airports"
+
 const fetchToken = ()=>{
     const token = localStorage.getItem("cmjd113")
+    console.log("Bearer "+token)
     return "Bearer "+token;
 }
 const saveAirport = async (airportData : any) =>{

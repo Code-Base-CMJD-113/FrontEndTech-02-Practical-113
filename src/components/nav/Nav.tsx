@@ -31,7 +31,7 @@ function classNames(...classes: string[]) {
 
 
 export default function Nav() {
-  const { isAuthenticated, login, logout }  =useAuth();
+  const { isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
 
   const navigation = isAuthenticated ? secureNav : openNav;
